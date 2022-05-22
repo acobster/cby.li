@@ -2,6 +2,7 @@
   (:require
     [clojure.core.match :refer [match]]
     [org.httpkit.server :as http]
+    [li.cby.db :as db]
     [li.cby.core :as core]))
 
 
@@ -46,4 +47,5 @@
   (start!))
 
 (defn -main [& _]
+  (db/start!)
   (start!))
