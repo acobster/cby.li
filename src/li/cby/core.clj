@@ -1,6 +1,6 @@
 (ns li.cby.core
   (:require
-    [clojure.java.jdbc :as jdbc]))
+    [li.cby.db :as db]))
 
 (defn home [req]
   {:body "HOME"
