@@ -10,9 +10,11 @@
 (defn app [req]
   (match [(:request-method req) (:uri req)]
 
+    ;; Have to match specific URLs first. Start with the home page.
     [:get "/"]
     (core/home req)
 
+    ;; POSTing to the home page is an error.
     [:post "/"]
     (core/error {:message "DON'T DO THAT."})
 
@@ -24,6 +26,7 @@
     [:post _]
     (core/create req)
 
+    ;; Anything else is an error.
     [_ _]
     (core/error {:message "DON'T DO THAT."})))
 
