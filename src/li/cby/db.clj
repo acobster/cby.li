@@ -12,8 +12,8 @@
     db
     (jdbc/create-table-ddl
       :links
-      [[:shortened "varchar(255)" :primary :key]
-       [:url "varchar(255)"]
+      [[:shortened "varchar(255)" :primary :key "not null"]
+       [:url "varchar(255)" "not null"]
        [:created_at :datetime :default :current_timestamp]]
       {:conditional? true}))
   nil)
@@ -33,8 +33,8 @@
 (comment
   (start!)
   (jdbc/query db "pragma table_info(links)")
-  (query db "SELECT * FROM links")
-  (query db ["SELECT * FROM links WHERE shortened = ?" "asdf"])
+  (jdbc/query db "SELECT * FROM links")
+  (jdbc/query db ["SELECT * FROM links WHERE shortened = ?" "asdf"])
 
   (create! {:shortened "asdf" :url "https://github.com/asdf-vm/asdf"})
   (create! {:shortened "lobs" :url "https://lobste.rs"})
