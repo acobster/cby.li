@@ -2,6 +2,7 @@
   (:require
     [clojure.core.match :refer [match]]
     [org.httpkit.server :as http]
+    [ring.middleware.defaults :as mid]
     [li.cby.db :as db]
     [li.cby.core :as core]))
 
@@ -40,8 +41,16 @@
 (defn start! []
   (when (fn? @stop-server!)
     (@stop-server!))
-  (reset! stop-server!
-          (http/run-server app {:port 9002})))
+  (let [;; TODO environment-specific middleware
+        middleware
+        #(mid/wrap-defaults % (-> mid/site-defaults
+                                  (assoc :cookies false)
+                                  (assoc :session false)
+                                  (assoc-in [:security :anti-forgery] false)))
+        app (middleware app)]
+    (reset!
+      stop-server!
+      (http/run-server app {:port 9002}))))
 
 (comment
   (start!))
