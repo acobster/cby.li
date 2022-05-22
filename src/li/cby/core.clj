@@ -19,11 +19,10 @@
       {:status 200
        :body "HOME"})))
 
-(defn create [{:keys [params]}]
+(defn create [{:keys [params config]}]
   (let [short (:shortened params)
         url (db/get-expanded short)
-        ;; TODO get this from config
-        link (str "http://localhost:9002/" short)]
+        link (str (:base-uri config) "/" short)]
     (if url
       {:status 400
        :body (str link " already exists")}

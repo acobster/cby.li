@@ -30,6 +30,30 @@
 
 
 
+;;; CONFIG
+
+(defonce env
+  {:env (keyword (or (System/getenv "ENV") "production"))
+   :base-uri (or (System/getenv "BASE_URI") "https://cby.li")})
+
+(def defaults
+  {:dev
+   (-> mid/site-defaults
+       (assoc :cookies false)
+       (assoc :session false)
+       (assoc-in [:security :anti-forgery] false))
+   :production
+   (-> mid/secure-site-defaults
+       (assoc :cookies false)
+       (assoc :session false)
+       (assoc-in [:security :anti-forgery] false))})
+
+(defn wrap-config [handler]
+  (fn [req]
+    (handler (assoc req :config (select-keys env [:base-uri])))))
+
+
+
 ;;; HTTP SERVER
 
 (defonce stop-server! (atom nil))
@@ -37,12 +61,12 @@
 (defn start! []
   (when (fn? @stop-server!)
     (@stop-server!))
-  (let [;; TODO environment-specific middleware
+  (let [ring-defaults (get defaults (:env env))
         middleware
-        #(mid/wrap-defaults % (-> mid/site-defaults
-                                  (assoc :cookies false)
-                                  (assoc :session false)
-                                  (assoc-in [:security :anti-forgery] false)))
+        (fn [handler]
+          (-> handler
+              (wrap-config)
+              (mid/wrap-defaults ring-defaults)))
         app (middleware app)]
     (reset!
       stop-server!
