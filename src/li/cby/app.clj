@@ -16,17 +16,13 @@
     [:get "/"]
     (core/home req)
 
-    ;; POSTing to the home page is an error.
+    ;; POSTing to the home page creates a new link redirect.
     [:post "/"]
-    (core/error {:message "DON'T DO THAT."})
+    (core/create req)
 
     ;; Redirect to original URL (or 404).
     [:get _]
     (core/redirect req)
-
-    ;; Create a new shortened URL.
-    [:post _]
-    (core/create req)
 
     ;; Anything else is an error.
     [_ _]
