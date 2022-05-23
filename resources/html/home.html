@@ -31,8 +31,7 @@
     <ul>
       {% for row in recent %}
         <li>
-          <code>/{{row.shortened}}</code> ➡
-          <a href="{{row.url}}">{{row.url}}</a>
+          <a href="/{{row.shortened}}"><code>/{{row.shortened}}</code></a>
         </li>
       {% endfor %}
     </ul>
