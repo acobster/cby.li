@@ -37,11 +37,11 @@
   (jdbc/query db ["SELECT * FROM links WHERE shortened = ?" "asdf"])
 
   (create! {:shortened "asdf" :url "https://github.com/asdf-vm/asdf"})
-  (create! {:shortened "lobs" :url "https://lobste.rs"})
+  (create! {:shortened "ls" :url "https://lobste.rs"})
 
   (get-expanded "does not exist")
   (get-expanded "asdf")
-  (get-expanded "lobs")
+  (get-expanded "ls")
 
   (jdbc/execute! db "DELETE FROM links")
 

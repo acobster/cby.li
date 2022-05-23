@@ -1,0 +1,18 @@
+{% extends "html/base.html" %}
+
+{% block main %}
+<form action="/" method="post" class="rows">
+  <div>
+    <label for="url">URL to shorten:</label>
+    <input type="text" name="url" id="url">
+  </div>
+  <div>
+    <label for="shortened">Shortened version (optional):</label>
+    <code>{% safe %}{{base-uri}}{% endsafe %}</code>
+    <input type="text" name="shortened" id="shortened">
+  </div>
+  <div>
+    <button type="submit">Shorten!</button>
+  </div>
+</form>
+{% endblock %}

@@ -1,0 +1,18 @@
+body {
+  width: 95%;
+  max-width: 70ch;
+  margin: 0 auto;
+}
+
+body, * * {
+  text-transform: lowercase;
+}
+
+.rows > * + * {
+  margin-top: 1em;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.5em;
+}

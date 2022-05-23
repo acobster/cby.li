@@ -1,8 +1,9 @@
 (ns li.cby.core
   (:require
+    [selmer.parser :as html]
     [li.cby.db :as db]))
 
-(defn home [{:keys [params]}]
+(defn home [{:keys [params config]}]
   (let [checking? (:shortened params)
         redirect (when checking?
                    (db/get-expanded (:shortened params)))]
@@ -16,8 +17,12 @@
        :body ""}
 
       :else
-      {:status 200
-       :body "HOME"})))
+      (let [html (html/render-file
+                   "html/home.html"
+                   {:base-uri (str (:base-uri config) "/")})]
+        {:status 200
+         :headers {"content-type" "text/html"}
+         :body html}))))
 
 (defn create [{:keys [params config]}]
   (let [short (:shortened params)
@@ -25,11 +30,16 @@
         link (str (:base-uri config) "/" short)]
     (if url
       {:status 400
+       :headers {"content-type" "text/html"}
        :body (str link " already exists")}
       (do
         (db/create! params)
-        {:status 200
-         :body link}))))
+        (let [html (html/render-file
+                     "html/created.html"
+                     {:link (str (:base-uri config) "/" short)})]
+          {:status 200
+           :headers {"content-type" "text/html"}
+           :body html})))))
 
 (defn redirect [{:keys [uri]}]
   (let [shortened (subs uri 1)

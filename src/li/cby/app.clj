@@ -3,6 +3,7 @@
     [clojure.core.match :refer [match]]
     [org.httpkit.server :as http]
     [ring.middleware.defaults :as mid]
+    [selmer.parser :as html]
     [li.cby.db :as db]
     [li.cby.core :as core]))
 
@@ -35,6 +36,9 @@
 (defonce env
   {:env (keyword (or (System/getenv "ENV") "production"))
    :base-uri (or (System/getenv "BASE_URI") "https://cby.li")})
+
+(when (not= :production env)
+  (html/cache-off!))
 
 (def defaults
   {:dev
