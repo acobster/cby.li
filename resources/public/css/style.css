@@ -50,9 +50,11 @@ label {
 
 ul {
   list-style: none;
+  padding-left: 0;
 }
 li + li {
   margin-top: 0.5em;
+  padding-left: 0;
 }
 
 code {
