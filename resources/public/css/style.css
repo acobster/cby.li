@@ -52,10 +52,6 @@ ul {
   list-style: none;
   padding-left: 0;
 }
-li + li {
-  margin-top: 0.5em;
-  padding-left: 0;
-}
 
 code {
   opacity: 0.7;
@@ -100,4 +96,11 @@ input[name=url] {
   border: 3px dashed #bb7cd2;
   border-radius: 10px;
   background: #d6ffec;
+}
+.recent ul {
+  display: flex;
+  flex-wrap: wrap;
+}
+.recent li {
+  flex: 50%;
 }
