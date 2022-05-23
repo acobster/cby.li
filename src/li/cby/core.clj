@@ -10,16 +10,20 @@
     (cond
       (and checking? redirect)
       {:status 400
+       :headers {"content-type" "text/html"}
        :body redirect}
 
       checking?
       {:status 200
-       :body ""}
+       :headers {"content-type" "text/html"}
+       :body "OK"}
 
       :else
-      (let [html (html/render-file
+      (let [recent (db/get-recent)
+            html (html/render-file
                    "html/home.html"
-                   {:base-uri (str (:base-uri config) "/")})]
+                   {:base-uri (str (:base-uri config) "/")
+                    :recent recent})]
         {:status 200
          :headers {"content-type" "text/html"}
          :body html}))))

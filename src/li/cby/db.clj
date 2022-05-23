@@ -30,8 +30,14 @@
        first
        :url))
 
+(defn get-recent []
+  (jdbc/query
+    db
+    ["SELECT * FROM links ORDER BY created_at DESC LIMIT 10"]))
+
 (comment
   (start!)
+  (get-recent)
   (jdbc/query db "pragma table_info(links)")
   (jdbc/query db "SELECT * FROM links")
   (jdbc/query db ["SELECT * FROM links WHERE shortened = ?" "asdf"])
@@ -45,6 +51,7 @@
 
   (jdbc/execute! db "DELETE FROM links")
   (jdbc/execute! db "DELETE FROM links WHERE shortened = 'false'")
+  (jdbc/execute! db "DELETE FROM links WHERE shortened = 'asdf'")
 
   ;;
   )

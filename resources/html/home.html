@@ -24,4 +24,18 @@
     <button type="submit">Shorten!</button>
   </div>
 </form>
+
+{% if recent %}
+  <aside class="recent">
+    <h2>Recent:</h2>
+    <ul>
+      {% for row in recent %}
+        <li>
+          <code>/{{row.shortened}}</code> ➡
+          <a href="{{row.url}}">{{row.url}}</a>
+        </li>
+      {% endfor %}
+    </ul>
+  </aside>
+{% endif %}
 {% endblock %}
