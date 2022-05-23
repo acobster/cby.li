@@ -29,14 +29,19 @@
         url (db/get-expanded short)
         link (str (:base-uri config) "/" short)]
     (if url
-      {:status 400
-       :headers {"content-type" "text/html"}
-       :body (str link " already exists")}
+      (let [html (html/render-file
+                   "html/home.html"
+                   {:error (str link " already exists!")
+                    :url (:url params)
+                    :base-uri (str (:base-uri config) "/")})]
+        {:status 400
+         :headers {"content-type" "text/html"}
+         :body html})
       (do
         (db/create! params)
         (let [html (html/render-file
                      "html/created.html"
-                     {:link (str (:base-uri config) "/" short)})]
+                     {:link link})]
           {:status 200
            :headers {"content-type" "text/html"}
            :body html})))))

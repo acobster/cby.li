@@ -2,16 +2,25 @@
 
 {% block main %}
 <form action="/" method="post" class="rows">
+  {% if error %}
+    <section class="errors">
+      <div>{{error}}</div>
+    </section>
+  {% endif %}
   <div>
     <label for="url">URL to shorten:</label>
-    <input type="text" name="url" id="url">
+    <div class="right">
+      <input type="text" name="url" id="url" value="{{url}}">
+    </div>
   </div>
   <div>
-    <label for="shortened">Shortened version (optional):</label>
-    <code>{% safe %}{{base-uri}}{% endsafe %}</code>
-    <input type="text" name="shortened" id="shortened">
+    <label for="shortened">Link (optional):</label>
+    <div class="right">
+      <code>{% safe %}{{base-uri}}{% endsafe %}</code>
+      <input type="text" name="shortened" id="shortened">
+    </div>
   </div>
-  <div>
+  <div class="center">
     <button type="submit">Shorten!</button>
   </div>
 </form>

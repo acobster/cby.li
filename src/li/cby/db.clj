@@ -44,6 +44,7 @@
   (get-expanded "ls")
 
   (jdbc/execute! db "DELETE FROM links")
+  (jdbc/execute! db "DELETE FROM links WHERE shortened = 'false'")
 
   ;;
   )
