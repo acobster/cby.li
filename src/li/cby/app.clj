@@ -5,7 +5,8 @@
     [ring.middleware.defaults :as mid]
     [selmer.parser :as html]
     [li.cby.db :as db]
-    [li.cby.core :as core]))
+    [li.cby.core :as core])
+  (:gen-class))
 
 
 ;;; APP
@@ -74,7 +75,8 @@
         app (middleware app)]
     (reset!
       stop-server!
-      (http/run-server app {:port 9002}))))
+      (http/run-server app {:port 9002})))
+  nil)
 
 (comment
   (start!))

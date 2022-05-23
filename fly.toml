@@ -1,0 +1,10 @@
+app = "cbyli"
+
+[build]
+  image = "flyio/hellofly:latest"
+
+[[services]]
+  internal_port = 9002
+
+...
+
