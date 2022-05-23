@@ -31,13 +31,14 @@ body {
 a {
   font-weight: bold;
   color: seagreen;
-  text-decoration-style: wavy;
+  text-decoration-style: dashed;
 }
 a:hover {
   color: #0d648e;
   text-decoration-thickness: 2px;
   text-decoration-skip-ink: none;
   text-decoration-color: #38aae1;
+  text-decoration-style: wavy;
 }
 
 label {
