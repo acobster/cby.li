@@ -13,6 +13,9 @@ body {
 
 * {
   box-sizing: border-box;
+}
+
+h1, h2, h3, p, span, a, li {
   text-transform: lowercase;
 }
 
@@ -63,7 +66,7 @@ button, input[type=text] {
   border: 3px solid seagreen;
   border-radius: 10px;
   padding: 0.5em;
-  color: green;
+  color: #064606;
   background: #afa;
 }
 button {
@@ -92,11 +95,13 @@ input[name=url] {
 }
 
 .recent {
-  color: #7e2086;
   padding: 1em;
   border: 3px dashed #bb7cd2;
   border-radius: 10px;
   background: #d6ffec;
+}
+.recent :is(h2, h3, a) {
+  color: #5c0dce;
 }
 .recent ul {
   display: flex;
