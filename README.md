@@ -12,9 +12,7 @@ A dead-simple link shortener written in Clojure.
 ## Development
 
 ```sh
-export BASE_URI=http://localhost:9002
-export ENV=dev
-clojure -M:repl
+BASE_URI=http://localhost:9002 ENV=dev clojure -M:repl
 ```
 
 ## TODO

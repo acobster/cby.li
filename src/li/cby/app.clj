@@ -79,7 +79,8 @@
   nil)
 
 (comment
-  (start!))
+  (start!)
+  (-main))
 
 (defn -main [& _]
   (db/start!)
