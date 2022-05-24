@@ -12,8 +12,8 @@ A dead-simple link shortener written in Clojure.
 ## Development
 
 ```sh
-export BASE_URI=https://cby.li
-export ENV=production
+export BASE_URI=http://localhost:9002
+export ENV=dev
 clojure -M:repl
 ```
 
@@ -21,3 +21,4 @@ clojure -M:repl
 
 * Validation
 * Nice UX to check whether a given short URL exists, as you type
+* Deploy to fly.io
