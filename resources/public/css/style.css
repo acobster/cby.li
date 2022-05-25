@@ -15,7 +15,7 @@ body {
   box-sizing: border-box;
 }
 
-h1, h2, h3, p, span, a, li {
+h1, h2, h3, p, span {
   text-transform: lowercase;
 }
 
