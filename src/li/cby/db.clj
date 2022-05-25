@@ -12,20 +12,20 @@
     db
     (jdbc/create-table-ddl
       :links
-      [[:shortened "varchar(255)" :primary :key "not null"]
+      [[:slug "varchar(255)" :primary :key "not null"]
        [:url "varchar(255)" "not null"]
        [:created_at :datetime :default :current_timestamp]]
       {:conditional? true}))
   nil)
 
-(defn create! [{:keys [shortened url]}]
-  (->> ["INSERT INTO links (shortened, url) VALUES (?, ?)"
-        shortened url]
+(defn create! [{:keys [slug url]}]
+  (->> ["INSERT INTO links (slug, url) VALUES (?, ?)"
+        slug url]
        (jdbc/execute! db))
   nil)
 
-(defn get-expanded [shortened]
-  (->> ["SELECT * FROM links WHERE shortened = ?" shortened]
+(defn get-expanded [slug]
+  (->> ["SELECT * FROM links WHERE slug = ?" slug]
        (jdbc/query db)
        first
        :url))
@@ -40,18 +40,18 @@
   (get-recent)
   (jdbc/query db "pragma table_info(links)")
   (jdbc/query db "SELECT * FROM links")
-  (jdbc/query db ["SELECT * FROM links WHERE shortened = ?" "asdf"])
+  (jdbc/query db ["SELECT * FROM links WHERE slug = ?" "asdf"])
 
-  (create! {:shortened "asdf" :url "https://github.com/asdf-vm/asdf"})
-  (create! {:shortened "ls" :url "https://lobste.rs"})
+  (create! {:slug "asdf" :url "https://github.com/asdf-vm/asdf"})
+  (create! {:slug "ls" :url "https://lobste.rs"})
 
   (get-expanded "does not exist")
   (get-expanded "asdf")
   (get-expanded "ls")
 
   (jdbc/execute! db "DELETE FROM links")
-  (jdbc/execute! db "DELETE FROM links WHERE shortened = 'false'")
-  (jdbc/execute! db "DELETE FROM links WHERE shortened = 'asdf'")
+  (jdbc/execute! db "DELETE FROM links WHERE slug = 'false'")
+  (jdbc/execute! db "DELETE FROM links WHERE slug = 'asdf'")
 
   ;;
   )

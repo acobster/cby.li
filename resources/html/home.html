@@ -14,10 +14,10 @@
     </div>
   </div>
   <div>
-    <label for="shortened">Link (optional):</label>
+    <label for="slug">Link (optional):</label>
     <div class="right">
       <code>{% safe %}{{base-uri}}{% endsafe %}</code>
-      <input type="text" name="shortened" id="shortened">
+      <input type="text" name="slug" id="slug">
     </div>
   </div>
   <div class="center">
@@ -31,7 +31,7 @@
     <ul>
       {% for row in recent %}
         <li>
-          <a href="/{{row.shortened}}"><code>/{{row.shortened}}</code></a>
+          <a href="/{{row.slug}}"><code>/{{row.slug}}</code></a>
         </li>
       {% endfor %}
     </ul>

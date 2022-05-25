@@ -4,9 +4,9 @@
     [li.cby.db :as db]))
 
 (defn home [{:keys [params config]}]
-  (let [checking? (:shortened params)
+  (let [checking? (:slug params)
         redirect (when checking?
-                   (db/get-expanded (:shortened params)))]
+                   (db/get-expanded (:slug params)))]
     (cond
       (and checking? redirect)
       {:status 400
@@ -29,7 +29,7 @@
          :body html}))))
 
 (defn create [{:keys [params config]}]
-  (let [short (:shortened params)
+  (let [short (:slug params)
         url (db/get-expanded short)
         link (str (:base-uri config) "/" short)]
     (if url
@@ -51,13 +51,13 @@
            :body html})))))
 
 (defn redirect [{:keys [uri]}]
-  (let [shortened (subs uri 1)
-        expanded (db/get-expanded shortened)]
+  (let [slug (subs uri 1)
+        expanded (db/get-expanded slug)]
     (if expanded
       {:body ""
        :headers {"Location" expanded}
        :status 301}
-      {:body (str "Not found: " shortened)
+      {:body (str "Not found: " slug)
        :status 404})))
 
 (defn error [{:keys [message status]}]
