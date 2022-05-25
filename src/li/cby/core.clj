@@ -1,7 +1,9 @@
 (ns li.cby.core
   (:require
     [selmer.parser :as html]
-    [li.cby.db :as db]))
+    [clojure.string :as string]
+    [li.cby.db :as db]
+    [li.cby.random :as random]))
 
 (defn home [{:keys [params config]}]
   (let [checking? (:slug params)
@@ -28,24 +30,51 @@
          :headers {"content-type" "text/html"}
          :body html}))))
 
+(defn- valid-url? [url]
+  (re-matches
+    #"^https?://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]"
+    url))
+
+(defn- generate-slug []
+  (loop [slug (random/rand-slug)]
+    (if (db/get-expanded slug)
+      (recur (random/rand-slug))
+      slug)))
+
+(defn- slug->link [config slug]
+  (str (:base-uri config) "/" slug))
+
 (defn create [{:keys [params config]}]
-  (let [short (:slug params)
-        url (db/get-expanded short)
-        link (str (:base-uri config) "/" short)]
-    (if url
+  (let [{:keys [url slug]} params
+        existing (and (seq slug) (db/get-expanded slug))]
+    (prn params)
+    (cond
+      (not (valid-url? url))
       (let [html (html/render-file
                    "html/home.html"
-                   {:error (str link " already exists!")
-                    :url (:url params)
+                   {:error "Invalid URL"
+                    :url url
+                    :base-uri (str (:base-uri config))})]
+        {:status 400
+         :headers {"content-type" "text/html"}
+         :body html})
+
+      existing
+      (let [html (html/render-file
+                   "html/home.html"
+                   {:error (str (slug->link config slug) " already exists!")
+                    :url url
                     :base-uri (str (:base-uri config) "/")})]
         {:status 400
          :headers {"content-type" "text/html"}
          :body html})
-      (do
-        (db/create! params)
+
+      :else
+      (let [slug (if (seq slug) slug (generate-slug))]
+        (db/create! {:url url :slug slug})
         (let [html (html/render-file
                      "html/created.html"
-                     {:link link})]
+                     {:link (slug->link config slug)})]
           {:status 200
            :headers {"content-type" "text/html"}
            :body html})))))
