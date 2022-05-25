@@ -15,7 +15,7 @@ body {
   box-sizing: border-box;
 }
 
-h1, h2, h3, p, span {
+h1, h2, h3, p, span, label, button {
   text-transform: lowercase;
 }
 
@@ -80,6 +80,13 @@ button:hover {
   background: green;
   color: #e1ffe1;
 }
+button:disabled {
+  color: #619361;
+  background: #c9e7c9;
+  border-color: #8abb8a;
+  text-decoration-line: line-through;
+  cursor: not-allowed;
+}
 
 input[name=url] {
   width: 100%;
@@ -92,6 +99,14 @@ input[name=url] {
   border: 3px dashed #bb7cd2;
   border-radius: 10px;
   background: #f4ffc0;
+}
+input.error {
+  background: #f4ffc0;
+  border-color: #bb7cd2;
+}
+
+.hidden {
+  display: none;
 }
 
 .recent {

@@ -10,18 +10,19 @@
   <div>
     <label for="url">URL to shorten:</label>
     <div class="right">
-      <input type="text" name="url" id="url" value="{{url}}">
+      <input type="text" name="url" id="url" value="{{url}}" required>
     </div>
   </div>
   <div>
-    <label for="slug">Link (optional):</label>
+    <label for="slug">Custom link (optional):</label>
     <div class="right">
       <code>{% safe %}{{base-uri}}{% endsafe %}</code>
       <input type="text" name="slug" id="slug">
     </div>
   </div>
+  <div class="hidden errors" data-js="slug-error"></div>
   <div class="center">
-    <button type="submit">Shorten!</button>
+    <button type="submit" data-js="submit">Shorten!</button>
   </div>
 </form>
 
@@ -37,4 +38,6 @@
     </ul>
   </aside>
 {% endif %}
+
+<script src="/js/home.js"></script>
 {% endblock %}
