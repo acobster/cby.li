@@ -17,6 +17,4 @@ BASE_URI=http://localhost:9002 ENV=dev clojure -M:repl
 
 ## TODO
 
-* Validation
-* Nice UX to check whether a given short URL exists, as you type
 * Deploy to fly.io
