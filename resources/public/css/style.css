@@ -7,7 +7,7 @@ body {
   font-size: 24px;
   font-family: sans-serif;
   color: #064606;
-  background: #e1ffe1;
+  background: #f1fff1;
   line-height: 1.5;
 }
 
@@ -78,7 +78,7 @@ button:hover {
 }
 button:hover {
   background: green;
-  color: #e1ffe1;
+  color: #f1fff1;
 }
 button:disabled {
   color: #619361;
