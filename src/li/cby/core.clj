@@ -47,7 +47,6 @@
 (defn create [{:keys [params config]}]
   (let [{:keys [url slug]} params
         existing (and (seq slug) (db/get-expanded slug))]
-    (prn params)
     (cond
       (not (valid-url? url))
       (let [html (html/render-file
