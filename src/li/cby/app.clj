@@ -72,10 +72,12 @@
           (-> handler
               (wrap-config)
               (mid/wrap-defaults ring-defaults)))
-        app (middleware app)]
+        app (middleware app)
+        port (Integer. (or (System/getenv "PORT") 9002))]
     (reset!
       stop-server!
-      (http/run-server app {:port 9002})))
+      (http/run-server app {:port port}))
+    (println "Started HTTP server at port" port))
   nil)
 
 (comment
