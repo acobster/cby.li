@@ -11,12 +11,11 @@
 (defn uberjar [_]
   (clean nil)
   (let [class-dir "target/classes"
-        version (format "0.1.%s" (build/git-count-revs nil))
-        jar-file (format "target/cby.li-%s.jar" version)
+        jar-file "target/cby.li.jar"
         basis (build/create-basis {:project "deps.edn"})]
     (build/write-pom {:class-dir class-dir
                       :lib 'acobster/cby.li
-                      :version version
+                      :version "0.1.0"
                       :basis basis
                       :src-dirs ["src"]})
     (build/copy-dir {:src-dirs ["src" "resources"]
