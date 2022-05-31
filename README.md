@@ -28,3 +28,7 @@ The app is compiled as an [uberjar](https://newbedev.com/what-is-an-uber-jar), i
 ```sh
 BASE_URI=http://localhost:9002 ENV=dev clojure -M:repl
 ```
+
+## TODO
+
+* Favicon
