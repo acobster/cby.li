@@ -7,6 +7,7 @@ A dead-simple link shortener written in Clojure.
 * Fun.
 * Minimal dependencies.
 * Something I can self-host.
+* Play with Fly.io.
 * Nice reminders of recently created links!
 
 ## Deployment
