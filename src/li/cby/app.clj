@@ -51,6 +51,7 @@
    (-> mid/secure-site-defaults
        (assoc :cookies false)
        (assoc :session false)
+       (assoc-in [:security :ssl-redirect] false)
        (assoc-in [:security :anti-forgery] false))})
 
 (defn wrap-config [handler]
