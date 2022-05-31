@@ -1,6 +1,7 @@
 {:paths ["src" "resources"]
  :deps
- {org.clojure/core.match {:mvn/version "1.0.0"}
+ {org.clojure/clojure    {:mvn/version "1.11.1"}
+  org.clojure/core.match {:mvn/version "1.0.0"}
   http-kit/http-kit      {:mvn/version "2.3.0"}
   org.xerial/sqlite-jdbc {:mvn/version "3.36.0.3"}
   org.clojure/java.jdbc  {:mvn/version "0.7.12"}
