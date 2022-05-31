@@ -11,4 +11,4 @@ COPY src /app/src
 
 RUN clojure -T:build uberjar
 
-CMD ["java" "-jar" "/app/target/cby.li.jar"]
+CMD ["java", "-jar", "target/cby.li.jar"]
