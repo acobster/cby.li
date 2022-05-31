@@ -12,7 +12,15 @@ A dead-simple link shortener written in Clojure.
 
 ## Deployment
 
-cby.li runs on [Fly.io](https://fly.io).
+For now, cby.li runs on [Fly.io](https://fly.io). In theory, it can run anywhere you can run Docker. Just set the right environment variables and you're good to go:
+
+```
+BASE_URL=https://cby.li
+ENV=production
+PORT=9002
+```
+
+The values noted above are the defaults.
 
 To deploy, just do:
 
