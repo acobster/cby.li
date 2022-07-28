@@ -36,7 +36,7 @@
              class="short-link"
           ><code>/{{row.slug}}</code></a>
           &nbsp;
-          <a href="http://api.qrserver.com/v1/create-qr-code/?data={{row.url}}&size=300x300&format=svg"
+          <a href="http://api.qrserver.com/v1/create-qr-code/?data={{row.url|url-encode}}&size=300x300&format=svg"
              target="_blank"
              title="QR code for /{{row.slug}}, in SVG format"
              class="qr-link">[qr]</a>

@@ -1,9 +1,22 @@
 (ns li.cby.core
   (:require
-    [selmer.parser :as html]
     [clojure.string :as string]
+    [selmer.filters :as sf]
+    [selmer.parser :as html]
     [li.cby.db :as db]
-    [li.cby.random :as random]))
+    [li.cby.random :as random])
+  (:import
+    [java.net URLEncoder]))
+
+(defn- url-encode [s]
+  (URLEncoder/encode s))
+
+(sf/add-filter! :url-encode url-encode)
+
+(comment
+  (URLEncoder/encode "encode this plz?")
+  (url-encode "this too maybe?")
+  (html/render "{{s|url-encode}}" {:s "?encoded?"}))
 
 (defn home [{:keys [params config]}]
   (let [checking? (:slug params)
