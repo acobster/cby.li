@@ -32,7 +32,14 @@
     <ul>
       {% for row in recent %}
         <li>
-          <a href="/{{row.slug}}"><code>/{{row.slug}}</code></a>
+          <a href="/{{row.slug}}"
+             class="short-link"
+          ><code>/{{row.slug}}</code></a>
+          &nbsp;
+          <a href="http://api.qrserver.com/v1/create-qr-code/?data={{row.url}}&size=300x300&format=svg"
+             target="_blank"
+             title="QR code for /{{row.slug}}, in SVG format"
+             class="qr-link">[qr]</a>
         </li>
       {% endfor %}
     </ul>

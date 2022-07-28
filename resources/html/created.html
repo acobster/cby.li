@@ -4,6 +4,11 @@
 <div class="rows">
   <h2>You did it!</h2>
   <p>yr lnk 👉 <a href="{{link}}">{{link}}</a></p>
+  <p>
+    yr qr code 👇 <br><br>
+    <img title="QR code for {{link}}, in SVG format"
+      src="http://api.qrserver.com/v1/create-qr-code/?data={{link}}&size=300x300&format=svg">
+  </p>
   <p><a href="/">More!</a></p>
 </div>
 {% endblock %}

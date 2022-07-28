@@ -124,4 +124,13 @@ input.error {
 }
 .recent li {
   flex: 50%;
+  min-width: 20ch;
+}
+.recent .short-link {
+  display: inline-block;
+  width: 40%;
+}
+.recent .qr-link {
+  color: #7c6d92;
+  font-weight: normal;
 }
