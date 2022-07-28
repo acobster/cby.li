@@ -36,7 +36,8 @@
 
 (defonce env
   {:env (keyword (or (System/getenv "ENV") "production"))
-   :base-uri (or (System/getenv "BASE_URI") "https://cby.li")})
+   :base-uri (or (System/getenv "BASE_URI") "https://cby.li")
+   :qrcodegenerator-api-key (System/getenv "QRCODEGENERATOR_API_KEY")})
 
 (when (not= :production env)
   (html/cache-off!))
@@ -56,7 +57,9 @@
 
 (defn wrap-config [handler]
   (fn [req]
-    (handler (assoc req :config (select-keys env [:base-uri])))))
+    (handler (assoc req :config (select-keys env
+                                             [:base-uri
+                                              :qrcodegenerator-api-key])))))
 
 
 
